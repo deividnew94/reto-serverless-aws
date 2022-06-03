@@ -1,0 +1,193 @@
+swagger: '2.0'
+info:
+  title: Demo de integración SWAPI - Serverless - AWS Lambda
+  description: 'Integracion de SWAPI - Serverless - Nodejs - Express - Lambda - Mysql'
+  version: '1.0'
+host: https://412hnjylbk.execute-api.us-east-1.amazonaws.com
+localhost: http://localhost:3000
+basePath: /dev
+tags:
+  - name: listar-especies
+    description: Listar todas las especies
+  - name: crear-especie
+    description: Crear una nueva especie
+schemes:
+  - https
+  - http
+paths:
+  /api/specie:
+    get:
+      tags:
+        - listar-especies
+      summary: ''
+      description: Listar todas las especies
+      operationId: getAllSpecies
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              success:
+                type: boolean
+                description: true
+              message:
+                type: "string"
+                description: "Felicitaciones, lista de especies"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    description: ""
+                  custom_fields:
+                    type: "string"
+                    description: ""
+              statusCode:
+                type: "integer"
+                enum:
+                  - 200
+        "404":
+          description: "Not found"
+          schema:
+            type: "object"
+            properties:
+              error:
+                type: "integer"
+                format: "int64"
+                default: 404
+        "500":
+          description: "Invalid input"
+          schema:
+            type: "object"
+            properties:
+              error:
+                type: "integer"
+                format: "int64"
+                default: 500
+      security:
+        - Bearer: []
+  /api/specie/:
+    post:
+      tags:
+        - crear-especie
+      summary: ''
+      description: Crear una nueva especie
+      operationId: createSpecie
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: "name specie"
+        in: "query"
+        description: "Nombre de la especie"
+        required: true
+        type: "string"
+      - classification: "classficaton specie"
+        in: "query"
+        description: "Clase de especie"
+        required: true
+        type: "string"
+      - average_height: "Altura media"
+        in: "query"
+        description: "Altura media"
+        required: true
+        type: "string"
+      - skin_colors: "color de piel"
+        in: "query"
+        description: "Detalle de la categoria"
+        required: true
+        type: "string"
+      - hair_colors: "hair_colors"
+        in: "query"
+        description: "hair_colors"
+        required: true
+        type: "string"
+      - eye_colors: "color de ojos"
+        in: "query"
+        description: "eye_colors"
+        required: true
+        type: "string"
+      - speciecol: "speciecol"
+        in: "query"
+        description: "speciecol"
+        required: true
+        type: "string"
+      - average_lifespan: "average_lifespan"
+        in: "query"
+        description: "average_lifespan"
+        required: true
+        type: "string"
+      - homeworld: "homeworld"
+        in: "query"
+        description: "homeworld"
+        required: true
+        type: "string"
+      - language: "language"
+        in: "query"
+        description: "language"
+        required: true
+        type: "string"
+      - people: "people"
+        in: "query"
+        description: "people"
+        required: true
+        type: "string"
+      - films: "films"
+        in: "query"
+        description: "films"
+        required: true
+        type: "string"
+      - url: "url"
+        in: "query"
+        description: "url"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                description: "Felicitaciones, specie creada"
+              statusCode:
+                type: "integer"
+                enum:
+                  - 200
+        "404":
+          description: "Not found"
+          schema:
+            type: "object"
+            properties:
+              error:
+                type: "integer"
+                format: "int64"
+                default: 404
+        "500":
+          description: "Invalid input"
+          schema:
+            type: "object"
+            properties:
+              error:
+                type: "integer"
+                format: "int64"
+                default: 500
+      security:
+        - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+
+externalDocs:
+  description: Sobre Swagger
+  url: 'http://swagger.io'
