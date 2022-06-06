@@ -1,22 +1,21 @@
-"use strict";
+'use strict'
 
+const pool = require('../connection/database');
 
-const conn = require("../connection/database");
 
 // Lista espescies
 const getAllSpecies = async (req, res) => {
-
     try {
         let sql = `SELECT * FROM specie`;
 
-        let [result] = await conn.query(sql);
+        let [result] = await pool.query(sql);
 
         if ([result].length > 0) {
             res.status(200).json({
                 species: [result][0],
             });
         } else {
-            res.staus(200).json({
+            res.status(200).json({
                 message: 'Lista de especies no encontrada',
             });
         }
@@ -30,10 +29,10 @@ const getAllSpecies = async (req, res) => {
 
 // Registrar una nueva especie
 const createSpecie = async (req, res) => {
-
+    
     try {
         let result = { ...req.body };
-        const responseData = await conn.query("INSERT INTO specie set ?", [result]);
+        const responseData = await pool.query("INSERT INTO specie set ?", [result]);
         if (responseData) {
             res.status(200).json({
                 message: 'Especie creada con exito',
@@ -49,6 +48,7 @@ const createSpecie = async (req, res) => {
             message: e.message,
         });
     }
+    
 
 };
 

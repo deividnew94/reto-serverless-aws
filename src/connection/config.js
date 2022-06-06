@@ -6,6 +6,7 @@ const database = {
   user: process.env.DATABASE_USER || "root",
   password: process.env.DATABASE_PASSWORD || "mypassword",
   database: process.env.DATABASE_NAME || "dblinks",
+  port: 3306
 };
 
 module.exports = database;
